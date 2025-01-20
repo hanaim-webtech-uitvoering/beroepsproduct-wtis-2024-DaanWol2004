@@ -23,4 +23,28 @@ function maakVerbinding() {
   return $verbinding;
 }
 
+// Functie om een SELECT-query uit te voeren
+function getData($query, $params = []) {
+  try {
+      $conn = maakVerbinding();
+      $stmt = $conn->prepare($query);
+      $stmt->execute($params);
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  } catch (PDOException $e) {
+      die("Fout bij ophalen van gegevens: " . $e->getMessage());
+  }
+}
+
+// Functie om een INSERT, UPDATE of DELETE-query uit te voeren
+function postData($query, $params = []) {
+  try {
+      $conn = maakVerbinding();
+      $stmt = $conn->prepare($query);
+      $stmt->execute($params);
+      return true;
+  } catch (PDOException $e) {
+      die("Fout bij uitvoeren van query: " . $e->getMessage());
+  }
+}
+
 ?>

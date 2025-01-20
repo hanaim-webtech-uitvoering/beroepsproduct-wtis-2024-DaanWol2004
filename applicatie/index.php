@@ -1,4 +1,12 @@
-        <?php include 'header.php'; ?>
+<?php
+include 'header.php';
+
+if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] === 'Personnel') {
+    header('Location: bestellingen-personeel.php'); 
+    exit;
+}
+?>
+
         <main>
             <p>Welkom op de website van Pizzeria Sole Machina! Bekijk ons menu of plaats direct een bestelling.</p>
         </main>

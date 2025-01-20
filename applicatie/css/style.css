@@ -174,5 +174,9 @@ main ul li {
     margin-bottom: 15px;
 }
 
+.error-message {
+    color: red;  /* Red color for the error message */
+    text-align: center;  /* Centers the text */
+}
 
 

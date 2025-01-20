@@ -1,4 +1,11 @@
-        <?php include 'header.php'; ?>
+<?php
+include 'header.php';
+
+if (!isset($_SESSION['user']['role']) || $_SESSION['user']['role'] !== 'Personnel') {
+    header('Location: index.php');
+    exit;
+}
+?>
 
         <main>
             <h2>Bestelling #1234</h2>
