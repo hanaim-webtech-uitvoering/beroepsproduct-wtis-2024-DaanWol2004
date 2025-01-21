@@ -72,6 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (postData($query, $params)) {
             $_SESSION['user'] = [
+                'username' => $username,
                 'role' => $role
             ];
             header("Location: index.php");

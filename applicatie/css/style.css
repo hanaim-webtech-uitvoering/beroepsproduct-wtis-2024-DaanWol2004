@@ -179,6 +179,11 @@ main ul li {
     text-align: center;
 }
 
+.success-message {
+    color: green;
+    text-align: center;
+}
+
 td form {
     display: flex;
     align-items: center;
