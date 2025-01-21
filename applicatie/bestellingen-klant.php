@@ -1,5 +1,5 @@
 <?php
-include 'header.php'; // Include header which might contain session start and necessary assets
+include 'header.php';
 include './functions/db_connectie.php';
 
 if (!isset($_SESSION['user']['role']) || $_SESSION['user']['role'] !== 'Client') {
@@ -7,13 +7,12 @@ if (!isset($_SESSION['user']['role']) || $_SESSION['user']['role'] !== 'Client')
     exit;
 }
 
-$username = $_SESSION['user']['username']; // Get logged-in user's username
+$username = $_SESSION['user']['username'];
 
-// Query to fetch orders for this client
 $query = "
 SELECT 
     o.order_id,
-    STRING_AGG(p.name, ', ') AS items,
+    STRING_AGG(p.name + ' (x' + CAST(op.quantity AS VARCHAR) + ')', ', ') AS items,
     o.status
 FROM Pizza_Order o
 JOIN Pizza_Order_Product op ON o.order_id = op.order_id
@@ -22,8 +21,6 @@ WHERE o.client_username = :username
 GROUP BY o.order_id, o.status
 ORDER BY o.order_id DESC;
 ";
-
-
 
 $orders = getData($query, ['username' => $username]);
 
