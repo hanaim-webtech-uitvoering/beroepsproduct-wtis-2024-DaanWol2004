@@ -19,14 +19,14 @@ function getPizzaMenu() {
             pt.name AS ProductType,
             p.name AS ProductName,
             p.price AS ProductPrice,
-            STRING_AGG(i.name, ', ') WITHIN GROUP (ORDER BY i.name) AS Ingredients
+            COALESCE(STRING_AGG(i.name, ', ') WITHIN GROUP (ORDER BY i.name), '') AS Ingredients
         FROM 
             Product p
         JOIN 
             ProductType pt ON p.type_id = pt.name
-        JOIN 
+        LEFT JOIN 
             Product_Ingredient pi ON p.name = pi.product_name
-        JOIN 
+        LEFT JOIN 
             Ingredient i ON pi.ingredient_name = i.name
         GROUP BY 
             pt.name, p.name, p.price
