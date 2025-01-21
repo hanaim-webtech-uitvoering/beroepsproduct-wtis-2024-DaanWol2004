@@ -10,24 +10,11 @@ if (!isset($_SESSION['winkelmandje'])) {
     $_SESSION['winkelmandje'] = [];
 }
 
-$productPrices = [
-    'Margherita' => 10.00,
-    'Pepperoni' => 12.50,
-];
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_to_cart'])) {
         $productName = trim($_POST['product_name']);
         $productPrice = $productPrices[$productName] ?? 0;
         $_SESSION['winkelmandje'][] = ['name' => $productName, 'price' => $productPrice];
-    }
-
-    if (isset($_POST['remove_item'])) {
-        $productName = $_POST['product_name'];
-        $_SESSION['winkelmandje'] = array_filter($_SESSION['winkelmandje'], function($item) use ($productName) {
-            return $item['name'] !== $productName;
-        });
-        $_SESSION['winkelmandje'] = array_values($_SESSION['winkelmandje']);
     }
 
     if (isset($_POST['update_cart'])) {
