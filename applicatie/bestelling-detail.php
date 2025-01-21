@@ -46,6 +46,9 @@ if ($order) {
     $error_message = "Order not found.";
 }
 
+$datetime_object = new DateTime($datetime);
+$formatted_datetime = $datetime_object->format('H:i d-m-Y');
+
 function getOrderStatus($status) {
     switch ($status) {
         case 1:
@@ -60,17 +63,17 @@ function getOrderStatus($status) {
 }
 ?>
 
-<main>
-    <?php if (isset($error_message)) { ?>
-        <p><?php echo $error_message; ?></p>
-    <?php } else { ?>
-        <h2>Bestelling #<?php echo $order_id; ?></h2>
-        <p><strong>Naam Klant:</strong> <?php echo $client_name; ?></p>
-        <p><strong>Adres:</strong> <?php echo $address; ?></p>
-        <p><strong>Tijd van Bestelling:</strong> <?php echo $datetime; ?></p>
-        <p><strong>Items:</strong> <?php echo $products_list; ?></p>
-        <p><strong>Status:</strong> <?php echo getOrderStatus($status); ?></p>
-    <?php } ?>
-</main>
-</body>
+        <main>
+            <?php if (isset($error_message)) { ?>
+                <p><?php echo $error_message; ?></p>
+            <?php } else { ?>
+                <h2>Bestelling #<?php echo $order_id; ?></h2>
+                <p><strong>Naam Klant:</strong> <?php echo $client_name; ?></p>
+                <p><strong>Adres:</strong> <?php echo $address; ?></p>
+                <p><strong>Tijd van Bestelling:</strong> <?php echo $formatted_datetime; ?></p>
+                <p><strong>Items:</strong> <?php echo $products_list; ?></p>
+                <p><strong>Status:</strong> <?php echo getOrderStatus($status); ?></p>
+            <?php } ?>
+        </main>
+    </body>
 </html>
