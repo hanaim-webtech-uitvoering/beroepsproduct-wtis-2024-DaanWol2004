@@ -1,4 +1,3 @@
-
 IF OBJECT_ID('User', 'U') IS NOT NULL
     DROP TABLE [User];
 
