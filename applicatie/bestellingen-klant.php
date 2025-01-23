@@ -24,27 +24,27 @@ ORDER BY o.order_id DESC;
 ";
 
 $orders = getData($query, ['username' => $username]);
-
 ?>
-<main>
-    <table>
-        <thead>
-            <tr>
-                <th>Bestelnummer</th>
-                <th>Items</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($orders as $order): ?>
-            <tr>
-                <td>#<?= htmlspecialchars($order['order_id']) ?></td>
-                <td><?= htmlspecialchars($order['items']) ?></td>
-                <td><?= getOrderStatus($order['status']) ?></td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-</main>
-</body>
+
+        <main>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Bestelnummer</th>
+                        <th>Items</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($orders as $order): ?>
+                    <tr>
+                        <td>#<?= htmlspecialchars($order['order_id']) ?></td>
+                        <td><?= htmlspecialchars($order['items']) ?></td>
+                        <td><?= getOrderStatus($order['status']) ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </main>
+    </body>
 </html>
