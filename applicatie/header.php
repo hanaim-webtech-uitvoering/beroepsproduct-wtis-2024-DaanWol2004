@@ -1,5 +1,6 @@
 <?php
 session_start();
+include './functions/db_connectie.php';
 
 if (isset($_GET['logout'])) {
     session_unset();
@@ -8,8 +9,12 @@ if (isset($_GET['logout'])) {
     exit();
 }
 
-$isLoggedIn = isset($_SESSION['user']) && isset($_SESSION['user']['role']);
-$userRole = $isLoggedIn ? $_SESSION['user']['role'] : null;
+if(isset($_SESSION['user']['username'])){
+    $role = getUserRoleByUsername($_SESSION['user']['username']);
+}
+
+$isLoggedIn = isset($_SESSION['user']) && $role;
+$userRole = $isLoggedIn ? $role : null;
 
 function getNavigation($isLoggedIn, $userRole) {
     $navHtml = '<nav>

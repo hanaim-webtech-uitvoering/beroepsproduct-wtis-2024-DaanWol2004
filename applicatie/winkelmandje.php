@@ -1,14 +1,17 @@
 <?php
 include 'header.php';
-include 'functions/db_connectie.php';
 include './functions/winkelmand-functies.php';
 
-if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] === 'Personnel') {
+if(isset($_SESSION['user']['username'])){
+    $role = getUserRoleByUsername($_SESSION['user']['username']);
+}
+
+if (isset($role) && $role === 'Personnel') {
     header('Location: bestellingen-personeel.php');
     exit;
 }
 
-if (isset($_SESSION['user']['username'])) {
+if (isset($role)) {
     $username = $_SESSION['user']['username'];
     
     $query = "SELECT first_name, last_name, address FROM [User] WHERE username = :username";

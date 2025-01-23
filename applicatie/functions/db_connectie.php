@@ -23,7 +23,6 @@ function maakVerbinding() {
   return $verbinding;
 }
 
-// Functie om een SELECT-query uit te voeren
 function getData($query, $params = []) {
   try {
       $conn = maakVerbinding();
@@ -35,7 +34,6 @@ function getData($query, $params = []) {
   }
 }
 
-// Functie om een INSERT, UPDATE of DELETE-query uit te voeren
 function postData($query, $params = []) {
   try {
       $conn = maakVerbinding();
@@ -47,4 +45,16 @@ function postData($query, $params = []) {
   }
 }
 
+function getUserRoleByUsername($username) {
+  $query = "SELECT role FROM [User] WHERE username = :username";
+  $params = [':username' => $username];
+  
+  $result = getData($query, $params);
+  
+  if (!empty($result)) {
+      return $result[0]['role'];
+  } else {
+      return null;
+  }
+}
 ?>

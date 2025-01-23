@@ -1,8 +1,7 @@
 <?php
 include 'header.php';
-include './functions/db_connectie.php';
 
-if (isset($_SESSION['user']['role'])) {
+if (isset($_SESSION['user']['username'])) {
     header('Location: index.php');
     exit;
 }
@@ -17,8 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($user && password_verify($password, $user[0]['password'])) {
             $_SESSION['user'] = [
-                'username' => $username,
-                'role' => $user[0]['role']
+                'username' => $username
             ];
             header('Location: index.php');
             exit;

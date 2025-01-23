@@ -1,12 +1,16 @@
 <?php
 include 'header.php';
-include './functions/db_connectie.php';
 include './functions/order-status.php';
 
-if (!isset($_SESSION['user']['role']) || $_SESSION['user']['role'] !== 'Client') {
+if(isset($_SESSION['user']['username'])){
+    $role = getUserRoleByUsername($_SESSION['user']['username']);
+}
+
+if (!isset($role) || $role !== 'Client') {
     header('Location: index.php');
     exit;
 }
+
 
 $username = $_SESSION['user']['username'];
 

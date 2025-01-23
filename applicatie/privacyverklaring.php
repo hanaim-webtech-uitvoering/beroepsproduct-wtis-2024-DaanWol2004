@@ -1,10 +1,15 @@
 <?php
 include 'header.php';
 
-if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] === 'Personnel') {
+if(isset($_SESSION['user']['username'])){
+    $role = getUserRoleByUsername($_SESSION['user']['username']);
+}
+
+if (isset($role) && $role === 'Personnel') {
     header('Location: bestellingen-personeel.php'); 
     exit;
 }
+
 ?>
 
         <main>
