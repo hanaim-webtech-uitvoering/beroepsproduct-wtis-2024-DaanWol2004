@@ -1,6 +1,7 @@
 <?php
 include 'header.php';
 include './functions/db_connectie.php';
+include './functions/order-status.php';
 
 if (!isset($_SESSION['user']['role']) || $_SESSION['user']['role'] !== 'Personnel') {
     header('Location: index.php');
@@ -49,18 +50,6 @@ if ($order) {
 $datetime_object = new DateTime($datetime);
 $formatted_datetime = $datetime_object->format('H:i d-m-Y');
 
-function getOrderStatus($status) {
-    switch ($status) {
-        case 1:
-            return 'Wordt bereid';
-        case 2:
-            return 'Onderweg';
-        case 3:
-            return 'Afgeleverd';
-        default:
-            return 'Onbekend';
-    }
-}
 ?>
 
         <main>

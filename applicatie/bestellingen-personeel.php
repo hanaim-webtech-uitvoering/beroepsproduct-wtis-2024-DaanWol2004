@@ -1,6 +1,7 @@
 <?php
 include 'header.php';
 include './functions/db_connectie.php';
+include './functions/order-status.php';
 
 if (!isset($_SESSION['user']['role']) || $_SESSION['user']['role'] !== 'Personnel') {
     header('Location: index.php');
@@ -46,12 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id']) && isset(
                         <tr>
                             <td><a href="bestelling-detail.php?order_id=<?= $order['order_id'] ?>">#<?= $order['order_id'] ?></a></td>
                             <td><?= $order['items'] ?></td>
-                            <td>
-                                <?php
-                                $statusLabels = ['Wordt bereid', 'Onderweg', 'Bezorgd'];
-                                echo $statusLabels[$order['status'] - 1];
-                                ?>
-                            </td>
+                            <td><?= getOrderStatus($order['status']) ?></td>
                             <td>
                                 <form class="action-form" method="POST" action="">
                                     <input type="hidden" name="order_id" value="<?= $order['order_id'] ?>">

@@ -1,6 +1,7 @@
 <?php
 include 'header.php';
 include './functions/db_connectie.php';
+include './functions/order-status.php';
 
 if (!isset($_SESSION['user']['role']) || $_SESSION['user']['role'] !== 'Client') {
     header('Location: index.php');
@@ -39,24 +40,7 @@ $orders = getData($query, ['username' => $username]);
             <tr>
                 <td>#<?= htmlspecialchars($order['order_id']) ?></td>
                 <td><?= htmlspecialchars($order['items']) ?></td>
-                <td>
-                    <?php
-                        switch ($order['status']) {
-                            case 1:
-                                echo "Wordt bereid";
-                                break;
-                            case 2:
-                                echo "Onderweg";
-                                break;
-                            case 3:
-                                echo "Geleverd";
-                                break;
-                            default:
-                                echo "Onbekend";
-                                break;
-                        }
-                    ?>
-                </td>
+                <td><?= getOrderStatus($order['status']) ?></td>
             </tr>
             <?php endforeach; ?>
         </tbody>
